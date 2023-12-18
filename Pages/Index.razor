@@ -45,10 +45,10 @@ else
 @code
 {
     private PizzaSpecial[] todaysPizzas;
-
+    
     protected override async Task OnInitializedAsync()
     {
-        todaysPizzas = await PizzaSvc.GetPizzasAsync();
+     todaysPizzas = await HttpClient.GetFromJsonAsync<PizzaSpecial[]>(NavigationManager.BaseUri + "specials");
     }
 
 }

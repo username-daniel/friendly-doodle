@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tartine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+284298216c53cdadeb3c8dd22aa80cc31a381f07")]
 [assembly: System.Reflection.AssemblyProductAttribute("tartine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tartine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
