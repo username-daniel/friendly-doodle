@@ -29,3 +29,4 @@
 /Users/elite/Workplace/zone/sharp/tartine/obj/Debug/net6.0/tartine.pdb
 /Users/elite/Workplace/zone/sharp/tartine/obj/Debug/net6.0/tartine.genruntimeconfig.cache
 /Users/elite/Workplace/zone/sharp/tartine/obj/Debug/net6.0/ref/tartine.dll
+/Users/elite/Workplace/zone/sharp/tartine/obj/Debug/net6.0/tartine.sourcelink.json
