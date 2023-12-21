@@ -1,49 +1,43 @@
-﻿@page "/pizzas"
+﻿@page "/"
 @using tartine.Data
+    @inject HttpClient HttpClient
+    @inject NavigationManager NavigationManager
+    @using tartine.Services
+    @inject OrderState OrderState
 
-@inject HttpClient HttpClient
-@inject NavigationManager NavigationManager
+    <div class="main">
+      <h1>Blazing Pizzas</h1>
+      <ul class="pizza-cards">
+        @if (specials != null)
+        {
+          @foreach (var special in specials)
+          {
+            <li @onclick="@(() => OrderState.ShowConfigurePizzaDialog(special))" style="background-image: url('@special.ImageUrl')">
+              <div class="pizza-info">
+              <span class="title">@special.Name</span>
+              @special.Description
+              <span class="price">@special.GetFormattedBasePrice()</span>
+              </div>
+            </li>
+          }
+        }
+      </ul>
+    </div>
 
-<h1>Choose your pizza</h1>
-
-<p>We have all these delicious recipes:</p>
-
-
-
-<table>
- <thead>
-  <tr>
-   <th>Pizza Name</th>
-   <th>Description</th>
-  </tr>
- </thead>
- <tbody>
- @if (todaysPizzas == null)
- {
-     <p>We're finding out what pizzas are available today...</p>
- }
- else
- {
-     @foreach (var pizza in todaysPizzas)
-     {
-         <tr>
-             <td>@pizza.Name</td>
-             <td>@pizza.Description</td>
-         </tr>
-     }
- }
- 
- </tbody>
-</table>
-
-@code
-{
-    private PizzaSpecial[] todaysPizzas;
-     
-    
-    protected override async Task OnInitializedAsync()
+    @if (OrderState.ShowingConfigureDialog)
     {
-     todaysPizzas = await HttpClient.GetFromJsonAsync<PizzaSpecial[]>(NavigationManager.BaseUri + "specials");
+        <ConfigurePizzaDialog
+            Pizza="OrderState.ConfiguringPizza"
+            Cancel="OrderState.CancelConfigurePizzaDialog"
+            Confirm="OrderState.ConfirmConfigurePizzaDialog" />
     }
 
-}
+    @code {
+        List<PizzaSpecial> specials = new List<PizzaSpecial>();
+
+        protected override async Task OnInitializedAsync()
+        {
+            specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + "specials");
+        }
+    }
+    
