@@ -1,7 +1,6 @@
 ﻿@page "/pizzas"
 @using tartine.Data
-@using tartine
-@inject PizzaService PizzaSvc
+
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
 
@@ -9,42 +8,38 @@
 
 <p>We have all these delicious recipes:</p>
 
-@if (todaysPizzas == null)
-{
-    <p>We're finding out what pizzas are available today...</p>
-}
-else
-{
-    <!-- This markup will be rendered once the pizzas are loaded -->
-}
+
 
 <table>
  <thead>
   <tr>
    <th>Pizza Name</th>
    <th>Description</th>
-   <th>Vegetarian?</th>
-   <th>Vegan?</th>
-   <th>Price</th>
   </tr>
  </thead>
  <tbody>
-  @foreach (var pizza in todaysPizzas)
-  {
-   <tr>
-    <td>@pizza.Name</td>
-    <td>@pizza.Description</td>
-    @*<td>@pizza.Vegetarian</td>
-    <td>@pizza.Vegan</td>
-    <td>@pizza.Price</td>*@
-   </tr>
-  }
+ @if (todaysPizzas == null)
+ {
+     <p>We're finding out what pizzas are available today...</p>
+ }
+ else
+ {
+     @foreach (var pizza in todaysPizzas)
+     {
+         <tr>
+             <td>@pizza.Name</td>
+             <td>@pizza.Description</td>
+         </tr>
+     }
+ }
+ 
  </tbody>
 </table>
 
 @code
 {
     private PizzaSpecial[] todaysPizzas;
+     
     
     protected override async Task OnInitializedAsync()
     {
